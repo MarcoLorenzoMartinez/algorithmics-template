@@ -1,0 +1,23 @@
+package lab01_alg;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class JavaA1 {
+	
+	private ArrayList<int> listadoPrimos(int n) {
+		List<Integer> primes = new ArrayList<Integer>();
+	}
+	
+	private boolean primoA1(int m) {
+		boolean p = true;
+		for (int i = 2; i < m; i++) {
+			if (m%i == 0) {
+				p = false;
+			}
+		}
+		return p;
+	}
+	
+	
+}
