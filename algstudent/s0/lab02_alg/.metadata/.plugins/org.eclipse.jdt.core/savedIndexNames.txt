@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\marco\Desktop\UniOvi Marco\2º\2º - Second semester\Alg\Lab\lab02\lab02_javaEx\.metadata\.plugins\org.eclipse.jdt.core
+3856859921.index
+1865797976.index
+836344216.index
