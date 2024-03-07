@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.jdt.debug.ui.MAIN_METHOD_SELECTION_DIALOG">
+		<item key="ShowStatusLine" value="true"/>
+		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Subtraction1.java[Subtraction1&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Subtraction2.java[Subtraction2&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Subtraction3.java[Subtraction3&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Subtraction5.java[Subtraction5&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Subtraction4.java[Subtraction4&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Division2.java[Division2&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Division1.java[Division1&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Division5.java[Division5&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{VectorSum2.java[VectorSum2&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Fibonacci1.java[Fibonacci1&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{MergeSortTimes.java[MergeSortTimes&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Division4.java[Division4&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=lab05_alg/src&amp;lt;lab05{Fibonacci2.java[Fibonacci2&lt;/infoNode&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;"/>
+		<section name="DialogBoundsSettings">
+			<item key="DIALOG_HEIGHT" value="500"/>
+			<item key="DIALOG_WIDTH" value="600"/>
+			<item key="DIALOG_X_ORIGIN" value="100"/>
+			<item key="DIALOG_Y_ORIGIN" value="-13"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+	</section>
+</section>
