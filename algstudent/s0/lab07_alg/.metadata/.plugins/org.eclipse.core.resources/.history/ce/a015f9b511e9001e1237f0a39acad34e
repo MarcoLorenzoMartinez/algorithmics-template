@@ -1,0 +1,170 @@
+package lab07_alg;
+
+public class PatternMatching {
+	String text = new String();
+	String pattern = new String();
+	boolean[][] table;
+	
+	public PatternMatching(String text) {
+		this.text = text;
+		//printTable("1234"); // Testing purposes
+	}
+	/*
+	public void printTable(String pattern) {
+		for (int i = 0; i < table.length+1; i++) {
+			for (int j = 0; j < table.length+1; j++) {
+				// Print first pattern and text
+				if (i == 0 && (j == 0 || j == 1)) {
+					System.out.print(" \t");
+				} else if (j == 0 && i == 1) {
+					System.out.print(" \t");
+				} else if (i == 0) {
+					if (j != table.length) {
+						System.out.print(pattern.charAt(j-2) + "\t");
+					} else {
+						System.out.print(pattern.charAt(j-2) + "\n");
+					}
+				} else if (j == 0) {
+					System.out.print(text.charAt(i-2) + "\t");
+				}
+				
+				// Print boolean values
+				else {
+					if (j != table.length) {
+						if (table[i-1][j-1]) {
+							System.out.print("T\t");
+						} else {
+							System.out.print("F\t");
+						}
+					} else {
+						if (table[i-1][j-1]) {
+							System.out.print("T\n");
+						} else {
+							System.out.print("F\n");
+						}
+					}
+				}
+			}
+		}
+	}
+	*/
+	
+	// We could to this method with less ifs, but i made it like this 
+	// because in my opinion it is more readable and easier to see what we are doing
+	public boolean checkPattern(String pattern) {
+		this.pattern = pattern;
+		
+		int tLen = text.length();
+		int pLen = pattern.length();
+		table = new boolean[tLen+1][pLen+1];
+		
+		for (int i = 0; i < tLen+1; i++) {
+			for (int j = 0; j < pLen+1; j++) {
+				char cText = 0;
+				char cPattern = 0;
+				if (i != 0 && j != 0) {
+					cText = text.charAt(i-1);
+					cPattern = pattern.charAt(j-1);
+				}
+				// 1: Base case
+				if (i == 0 || j == 0) {
+					if (i == 0 && j == 0)
+						table[i][j] = true;
+					else
+						table[i][j] = false;
+				}
+				// 2: Both letters match
+				else if (cText == cPattern && cPattern != '*' && cPattern != '?'){
+					if (table[i-1][j-1])
+						table[i][j] = true;
+					else
+						table[i][j] = false;
+				}
+				// 3: Both letters do not match
+				else if (cText != cPattern && cPattern != '*' && cPattern != '?'){
+					table[i][j] = false;
+				}
+				// 4: We find a ?
+				else if (cPattern == '?') {
+					if (table[i-1][j-1])
+						table[i][j] = true;
+					else if (table[i][j-1])
+						table[i][j] = true;
+					else
+						table[i][j] = false;
+				}
+				// 5: We find a *
+				else if (cPattern == '*') { // We could only put else, but I put it this way just for explaining better what the method does
+					if (table[i-1][j-1])
+						table[i][j] = true;
+					else if (table[i][j-1])
+						table[i][j] = true;
+					else if (table[i-1][j])
+						table[i][j] = true;
+					else
+						table[i][j] = false;
+				}
+			}
+		}
+		return table[tLen][pLen];
+	}
+	
+	public void printsTable() {
+		System.out.println();
+		System.out.println("-------------------------------------------------------------------------");
+		System.out.println();
+		System.out.println("Text: " + this.text);
+		System.out.println("Pattern: " + this.pattern);
+		System.out.println();
+		for (int i = 0; i < table.length; i++) {
+			for (int j = 0; j < table[0].length; j++) {
+				if (table[i][j])
+					System.out.print("T ");
+				else
+					System.out.print("F ");
+			}
+			System.out.println();
+		}
+	}
+	
+	public void printTable() {
+		System.out.println();
+		System.out.println();
+		int tLen = text.length();
+		int pLen = pattern.length();
+		
+		for (int i = 0; i < tLen+2; i++) {
+			for (int j = 0; j < pLen+2; j++) {
+				if (i == 0) {
+					if (j == 0 || j == 1)
+						System.out.print("  ");
+					else if (j != pLen+1)
+						System.out.print(pattern.charAt(j-2) + " ");
+					else
+						System.out.print(pattern.charAt(j-2) + "\n");
+				}
+				else if (j == 0) {
+					if (i == 1)
+						System.out.print("  ");
+					else
+						System.out.print(text.charAt(i-2) + " ");
+				}
+				else {
+					if (j == pLen+1)
+						if (table[i][j])
+							System.out.print("T\n");
+						else
+							System.out.print("F\n");
+					else
+						if (table[i][j])
+							System.out.print("T ");
+						else
+							System.out.print("F ");
+				}
+					
+				
+					
+			}
+		}
+	}
+}
