@@ -1,0 +1,10 @@
+package lab08_alg;
+
+import java.util.List;
+
+public class NumericSquareAll {
+	int size;
+	int matrixSize;
+	String[][] matrix;
+	List<String[][]> results;
+}

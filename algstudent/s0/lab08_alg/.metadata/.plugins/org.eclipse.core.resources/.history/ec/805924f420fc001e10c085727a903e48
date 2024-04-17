@@ -1,0 +1,122 @@
+package lab08_alg;
+
+import java.util.List;
+
+public class Main {
+	public static void main(String[] args) {
+		/*
+		// TESTING -> Numeric square one
+		NumericSquareOne ns = new NumericSquareOne();
+		ns.fileToMatrix("src/testFiles/test07.txt");
+		
+		System.out.println("ORIGINAL MATRIX");
+		ns.printMatrix(ns.matrix);		
+		
+		System.out.println();
+		System.out.println();
+		System.out.println("SOLUTION MATRIX");
+		ns.compute();
+		ns.printMatrix(ns.result);
+		*/
+		
+		
+		// TESTING -> Numeric square all
+		NumericSquareAll nsa = new NumericSquareAll();
+		nsa.fileToMatrix("src/testFiles/test00.txt");
+		
+		System.out.println("ORIGINAL MATRIX");
+		nsa.printMatrix(nsa.matrix);
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		nsa.compute();
+		int numSolutions = nsa.getSolutionCounter();
+		
+		System.out.println("-------------There are " + numSolutions + " SOLUTIONS-------------");
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("SOLUTION MATRICES");
+		for (String[][] solution : nsa.getResults()) {
+			nsa.printMatrix(solution);
+			System.out.println();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	// ns.fileToMatrix("src/testFiles/test00.txt");
+	// ns.printMatrix();
+	
+	String[][] matrix = {
+			{"?","+","2","+","3","=","6"},
+			{"+","n","*","n","-","n","n"}, //
+			{"1","*","2","-","?","=","-5"},
+			{"+","n","*","n","*","n","n"}, //
+			{"0","/","4","+","10","=","10"},
+			{"=","n","=","n","=","n","n"}, //
+			{"2","n","16","n","-40","n","n"}
+	};
+	
+	System.out.println("Row 0: " + ns.isFilledRow(matrix, 0));
+	System.out.println("Row 2: " + ns.isFilledRow(matrix, 2));
+	System.out.println("Row 4: " + ns.isFilledRow(matrix, 4));
+	System.out.println("Column 0: " + ns.isFilledColumn(matrix, 0));
+	System.out.println("Column 2: " + ns.isFilledColumn(matrix, 2));
+	System.out.println("Column 4: " + ns.isFilledColumn(matrix, 4));
+	
+	
+	
+	
+	
+	List<int[]> list = ns.getVariablePositions(matrix);
+	
+	for (int[] pos : list) {
+		System.out.println(pos[0] + " " + pos[1]);
+	}
+	
+	if (list.isEmpty()) {
+		System.out.println("EMPTY LIST");
+	}
+
+
+
+	boolean matchesResult0 = ns.checkMatchingRow(matrix, 0);
+	boolean matchesResult1 = ns.checkMatchingRow(matrix, 1);
+	boolean matchesResult2 = ns.checkMatchingRow(matrix, 2);
+	boolean matchesResult3 = ns.checkMatchingRow(matrix, 3);
+	
+	
+	for (int i = 0; i < matrix.length-1; i += 2) {
+		boolean matchesResult = ns.checkMatchingRow(matrix, i);
+		
+		System.out.println(i + ": " + matchesResult);
+	}
+	
+	System.out.println("----------");
+	
+	for (int i = 0; i < matrix.length-1; i += 2) {
+		boolean matchesResult = ns.checkMatchingColumn(matrix, i);
+		
+		System.out.println(i + ": " + matchesResult);
+	}
+	
+	System.out.print(ns.checkMatchingRow(matrix, 0));
+	*/
+}
