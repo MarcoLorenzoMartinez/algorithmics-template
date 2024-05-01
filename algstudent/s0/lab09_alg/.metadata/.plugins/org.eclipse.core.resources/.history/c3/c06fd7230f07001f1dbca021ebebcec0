@@ -1,0 +1,21 @@
+package lab09_alg;
+
+import java.util.List;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		String[][] matrix = 
+			{{"1","+","2","=","3"},
+			 {"*","","-","=",""},
+			 {"?","+","1","=","2"},
+			 {"=","","=","",""},
+			 {"1","","1","",""}
+			};
+		
+		Node node = new Node(matrix,0,0);
+		
+		node.goToNextUnknown();
+	}
+	
+}

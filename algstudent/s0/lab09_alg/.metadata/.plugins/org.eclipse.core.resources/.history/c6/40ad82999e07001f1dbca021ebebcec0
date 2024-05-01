@@ -1,0 +1,51 @@
+package lab09_alg;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class NumericSquareBaB {
+	int size;
+	int matrixSize;
+	Heap heap;
+	int pruneLimit;
+	Node bestNode;
+	
+	String[][] matrix;
+	String[][] result;
+	
+	public NumericSquareBaB() {
+		heap = new Heap();
+	}
+	
+	public void computeBaB(String filename) {
+		fileToMatrix(filename);
+		Node rootNode = new Node(matrix,0,0);
+		branchAndBound(rootNode);
+	}
+	
+	public void branchAndBound(Node rootNode) {
+		heap.insert(rootNode);
+
+	    pruneLimit = rootNode.initialValuePruneLimit();
+	    while (!heap.empty() && heap.estimateBest() < pruneLimit) {
+	      Node node = heap.extractBestNode();
+
+	      ArrayList<Node> children = node.expand();
+    	  
+	      for (Node child : children) {
+
+	    	  if (child.isSolution()) {
+	    		  int cost = child.getHeuristicValue();
+	    		  if (cost < pruneLimit) {
+	    			  pruneLimit = cost;
+	    			  bestNode = child;
+	    			  return;
+	    		  }
+	    	  } else if (child.getHeuristicValue() < pruneLimit) {
+	    		  heap.insert(child);
+	    	  }
+	      }
+	    }
+	}
+}

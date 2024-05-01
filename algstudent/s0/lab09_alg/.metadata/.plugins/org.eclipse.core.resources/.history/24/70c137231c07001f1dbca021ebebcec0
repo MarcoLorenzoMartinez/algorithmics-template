@@ -1,0 +1,5 @@
+package lab09_alg;
+
+public class Heap {
+	List<Node> heap = new ArrayList<Node>();
+}

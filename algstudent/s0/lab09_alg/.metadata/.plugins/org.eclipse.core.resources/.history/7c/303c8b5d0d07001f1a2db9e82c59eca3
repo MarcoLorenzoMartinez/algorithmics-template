@@ -1,0 +1,11 @@
+package lab09_alg;
+
+import java.util.List;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		String[][] matrix = new String[][];
+	}
+	
+}

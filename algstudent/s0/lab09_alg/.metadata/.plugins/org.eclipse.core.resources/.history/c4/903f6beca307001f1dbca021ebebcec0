@@ -1,0 +1,107 @@
+package lab09_alg;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class NumericSquareBaB {
+	int size;
+	int matrixSize;
+	Heap heap;
+	int pruneLimit;
+	Node resultNode;
+	
+	int computedNodes;
+	
+	String[][] matrix;
+	String[][] result;
+	
+	public NumericSquareBaB() {
+		heap = new Heap();
+	}
+	
+	public void computeBaB(String filename) { // Calling the branchAndBound method with the matrix of the provided file
+		fileToMatrix(filename);
+		Node rootNode = new Node(matrix,0,0);
+		branchAndBound(rootNode);
+	}
+	
+	public void branchAndBound(Node rootNode) {
+		heap.insert(rootNode);
+	    pruneLimit = rootNode.initialValuePruneLimit(); // The initial prune limit is the highest possible value
+	    
+	    while (!heap.empty() && heap.estimateBest() < pruneLimit) { // While there are nodes to find solutions in the heap and the best heuristic of the heap is under the prune limit
+	    	Node node = heap.extractBestNode(); // We take the first node of the heap to check if we can get a solution from it children
+
+	    	ArrayList<Node> children = node.expand(); // We compute the children of the selected node
+    	  
+	    	for (Node child : children) { // For each child in the computed children
+	    		if (child.isSolution()) { // If one of the childs is solution and...
+	    			int cost = child.getHeuristicValue();
+	    			if (cost < pruneLimit) { // ... its cost is lower than the prune limit, it is the result we are looking for, so we finish the method execution
+	    				pruneLimit = cost;
+	    				resultNode = child;
+	    				return;
+	    			}
+	    		} else if (child.getHeuristicValue() < pruneLimit) { // If the child is not solution but the heuristic value is lower than the prune limit we insert it in the heap
+	    			heap.insert(child);
+	    		}
+	    	}
+	    }
+	}
+	
+	/**
+	 * Reading the numeric square from a file
+	 * 
+	 * @param filename the name of the file where the numeric square is
+	 */
+	public void fileToMatrix(String filename) {
+		List<String> lines = new ArrayList<String>();
+		try {
+			lines = Helper.readLinesToList(filename);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		size = Integer.parseInt(lines.get(0));
+		matrixSize = (size*2)+1;
+		matrix = new String[matrixSize][matrixSize];
+		lines.remove(0);
+		
+		for (int i = 0; i < lines.size(); i++) {
+			String[] spLine = lines.get(i).split(" ");
+			if (i%2 == 0 && i != matrixSize-1) { // Line with numbers and operators
+				matrix[i] = spLine;
+			} else { // Line with only numbers or only operators
+				for (int j = 0; j < matrixSize; j++) {
+					if (j%2 == 0 && j/2 < spLine.length)
+						matrix[i][j] = spLine[j/2];
+					else
+						matrix[i][j] = null;
+				}
+			}
+		}
+		
+		result = matrix;
+	}
+	
+	public void printMatrix(String[][] matr) {
+		if (matr == null) {
+			System.out.print("NO RESULT");
+			return;
+		}	
+		
+		int size = matr.length;
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				System.out.print(matr[i][j] + "\t");
+			}
+			System.out.println();
+		}
+	}
+	
+	public void printResultNode() {
+		printMatrix(resultNode.getMatrix());
+	}
+}

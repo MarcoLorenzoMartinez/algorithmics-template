@@ -1,0 +1,101 @@
+package lab09_alg;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Node {
+	private String[][] matrix;
+	private int heuristicValue;
+	private int row;
+	private int column;
+	
+	public Node(String[][] matrix, int row, int column) {
+		this.matrix = matrix;
+		this.row = row;
+		this.column = column;
+	}
+	
+	public void calculateHeuristicValue() {
+		// TODO
+	}
+	
+	public boolean isSolution() {
+		return Helper.checkMatchingMatrix(matrix);
+	}
+	
+	public List<Node> expand(){
+		goToNextUnknown();
+		List<Node> childs = new ArrayList<Node>();
+		String[][] child = matrix; // Test if when changing something in child it also changes in matrix 
+		
+		for (int i = 0; i <= 9; i++) {
+			child[row][column] = "" + i;
+			Node childNode = new Node(child,0,0);
+			childs.add(childNode);
+		}
+		
+		return childs;
+	}
+
+	public void goToNextUnknown() {
+		int i = row;
+		int j = column;
+		
+		int len = matrix.length;
+		
+		while (i < len && j < len && !matrix[i][j].equals("?")) { // To finish? If all the matrix is iterated?
+			if (i < len-2 && j < len-2) {
+				j += 2;
+			} else if (j >= len-2) {
+				i += 2;
+				j = 0;
+			}
+		}
+		
+		if (i < len && j < len){ // Question mark found
+			row = i;
+			column = j;
+		} else { // No question mark
+			row = -1;
+			column = -1;
+		}
+	}
+
+	public String[][] getMatrix() {
+		return matrix;
+	}
+
+	public void setMatrix(String[][] matrix) {
+		this.matrix = matrix;
+	}
+
+	public int getHeuristicValue() {
+		calculateHeuristicValue();
+		return heuristicValue;
+	}
+
+	public void setHeuristicValue(int heuristicValue) {
+		this.heuristicValue = heuristicValue;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+
+	public int initialValuePruneLimit() {
+		return Integer.MAX_VALUE;
+	}
+	
+}

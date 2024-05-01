@@ -1,0 +1,56 @@
+package lab09_alg;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Node {
+	private String[][] matrix;
+	private int heuristicValue;
+	private int row;
+	private int column;
+	
+	public Node(String[][] matrix, int row, int column) {
+		this.matrix = matrix;
+		this.row = row;
+		this.column = column;
+	}
+	
+	public void calculateHeuristicValue() {
+		// TODO
+	}
+	
+	public boolean isSolution() {
+		return Helper.checkMatchingMatrix(matrix);
+	}
+	
+	public List<String[][]> expand(){
+		goToNextUnknown();
+		List<String[][]> childs = new ArrayList<String[][]>();
+		String[][] child = matrix; // Test if when changing something in child it also changes in matrix
+		
+		for (int i = 0; i <= 9; i++) {
+			child[row][column] = "" + i;
+			childs.add(child);
+		}
+	}
+
+	private void goToNextUnknown() {
+		int i = row;
+		int j = column;
+		
+		int len = matrix.length;
+		
+		while (!matrix[i][j].equals("?")) { // To finish? If all the matrix is iterated?
+			if (i < len-2 && j < len-2) {
+				j += 2;
+			} else if (j >= len-2) {
+				i += 1;
+				j = 0;
+			}
+			
+			row = i;
+			column = j;
+		}
+	}
+	
+}

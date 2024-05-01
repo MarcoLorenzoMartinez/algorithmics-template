@@ -1,0 +1,105 @@
+package lab09_alg;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class NumericSquareBaB {
+	int size;
+	int matrixSize;
+	Heap heap;
+	int pruneLimit;
+	Node resultNode;
+	
+	String[][] matrix;
+	String[][] result;
+	
+	public NumericSquareBaB() {
+		heap = new Heap();
+	}
+	
+	public void computeBaB(String filename) {
+		fileToMatrix(filename);
+		Node rootNode = new Node(matrix,0,0);
+		branchAndBound(rootNode);
+	}
+	
+	public void branchAndBound(Node rootNode) {
+		heap.insert(rootNode);
+	    pruneLimit = rootNode.initialValuePruneLimit();
+	    
+	    while (!heap.empty() && heap.estimateBest() < pruneLimit) {
+	    	Node node = heap.extractBestNode();
+
+	    	ArrayList<Node> children = node.expand();
+    	  
+	    	for (Node child : children) {
+	    		if (child.isSolution()) {
+	    			int cost = child.getHeuristicValue();
+	    			if (cost < pruneLimit) {
+	    				pruneLimit = cost;
+	    				bestNode = child;
+	    				return;
+	    			}
+	    		} else if (child.getHeuristicValue() < pruneLimit) {
+	    			heap.insert(child);
+	    		}
+	    	}
+	    }
+	}
+	
+	/**
+	 * Reading the numeric square from a file
+	 * 
+	 * @param filename the name of the file where the numeric square is
+	 */
+	public void fileToMatrix(String filename) {
+		List<String> lines = new ArrayList<String>();
+		try {
+			lines = Helper.readLinesToList(filename);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		size = Integer.parseInt(lines.get(0));
+		matrixSize = (size*2)+1;
+		matrix = new String[matrixSize][matrixSize];
+		lines.remove(0);
+		
+		for (int i = 0; i < lines.size(); i++) {
+			String[] spLine = lines.get(i).split(" ");
+			if (i%2 == 0 && i != matrixSize-1) { // Line with numbers and operators
+				matrix[i] = spLine;
+			} else { // Line with only numbers or only operators
+				for (int j = 0; j < matrixSize; j++) {
+					if (j%2 == 0 && j/2 < spLine.length)
+						matrix[i][j] = spLine[j/2];
+					else
+						matrix[i][j] = null;
+				}
+			}
+		}
+		
+		result = matrix;
+	}
+	
+	public void printMatrix(String[][] matr) {
+		if (matr == null) {
+			System.out.print("NO RESULT");
+			return;
+		}	
+		
+		int size = matr.length;
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				System.out.print(matr[i][j] + "\t");
+			}
+			System.out.println();
+		}
+	}
+	
+	public void printResultNode() {
+		printMatrix(resultNode.getMatrix());
+	}
+}
