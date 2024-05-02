@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\marco\Desktop\UniOvi Marco\2º\2º - Second semester\Alg\Lab\lab08\lab08.UO294324\lab08_alg\.metadata\.plugins\org.eclipse.jdt.core
+836344216.index
+1865797976.index
+2941459376.index
